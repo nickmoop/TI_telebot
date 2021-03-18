@@ -1,0 +1,49 @@
+1min:
+  analysis_interval: 5
+  candle_interval: 1min
+  extremum_percent: 0.5
+  grow_percent: 0.2
+  request_interval: 1
+  is_monitor_other_companies: true
+5min:
+  analysis_interval: 10
+  candle_interval: 5min
+  extremum_percent: 0.5
+  grow_percent: 0.8
+  request_interval: 5
+  is_monitor_other_companies: true
+10min:
+  analysis_interval: 30
+  candle_interval: 10min
+  extremum_percent: 0.5
+  grow_percent: 1.5
+  request_interval: 10
+  is_monitor_other_companies: true
+hour:
+  analysis_interval: 120
+  candle_interval: hour
+  extremum_percent: 0.5
+  grow_percent: 2.8
+  request_interval: 120
+  is_monitor_other_companies: true
+day:
+  analysis_interval: 2880
+  candle_interval: day
+  extremum_percent: 0.5
+  grow_percent: 15
+  request_interval: 2880
+  is_monitor_other_companies: true
+4hour:
+  analysis_interval: 480
+  candle_interval: hour
+  extremum_percent: 0.5
+  grow_percent: 6
+  request_interval: 480
+  is_monitor_other_companies: true
+other_companies:
+  analysis_interval: 120
+  candle_interval: 30min
+  extremum_percent: 1.5
+  grow_percent: 2.2
+  request_interval: 30
+  is_monitor_other_companies: true
