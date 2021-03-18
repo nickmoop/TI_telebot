@@ -3,6 +3,8 @@ from tmp_utils import load_yaml
 
 
 TMP_OTHER_COMPANIES = dict()
+GREEN_HEART = "\U0001F49A"
+RED_HEART = "\U0001F494"
 
 
 def tmp_monitor_other_companies(chat_id, other_companies_queue):
@@ -115,14 +117,15 @@ def find_local_min_max(candles, extremum_percent=None, **kwargs):
         return None
 
     if local_max_time > local_min_time:
-        tmp_up_or_down = "up"
+        tmp_up_or_down = GREEN_HEART
     else:
-        tmp_up_or_down = "down"
+        tmp_up_or_down = RED_HEART
 
     return "Local maximum at: {}\n" \
            "Local minimum at: {}\n" \
-           "Percent delta: {:.03f} ({}) ${}".format(
-        local_max_time, local_min_time, percent_delta, tmp_up_or_down, candles[-1]["c"]
+           "Percent delta: {:.03f} {} ${}".format(
+        local_max_time, local_min_time, percent_delta, tmp_up_or_down,
+        candles[-1]["c"],
     )
 
 
@@ -148,15 +151,19 @@ def tmp_find_local_grow(candles, grow_percent=None, **kwargs):
     )
 
     if open_price > close_price and percent_delta > grow_percent:
-        return "Local decrease: from {} to {}\n" \
-               "Percent delta: {:.03f} (down) ${}".format(
-            to_local_time(candles[0]["time"]), to_local_time(candles[-1]["time"]), percent_delta, candles[-1]["c"]
+        return "Decrease from {} to {}\n" \
+               "Percent delta: {:.03f} {} ${}".format(
+            to_local_time(candles[0]["time"]),
+            to_local_time(candles[-1]["time"]),
+            percent_delta, RED_HEART, candles[-1]["c"],
         )
 
     if close_price > open_price and percent_delta > grow_percent:
-        return "Local increase: from {} to {}\n" \
-               "Percent delta: {:.03f} (up) ${}".format(
-            to_local_time(candles[0]["time"]), to_local_time(candles[-1]["time"]), percent_delta, candles[-1]["c"]
+        return "Increase from {} to {}\n" \
+               "Percent delta: {:.03f} {} ${}".format(
+            to_local_time(candles[0]["time"]),
+            to_local_time(candles[-1]["time"]),
+            percent_delta, GREEN_HEART, candles[-1]["c"],
         )
 
     return None
@@ -185,14 +192,16 @@ def tmp_find_candle_grow(candles, grow_percent=None, **kwargs):
 
     if open_price > close_price and percent_delta > grow_percent:
         return "Candle decrease: {}\n" \
-               "Candle percent delta: {:.03f} (down) ${}".format(
-            to_local_time(candles[-1]["time"]), percent_delta, candles[-1]["c"]
+               "Candle percent delta: {:.03f} {} ${}".format(
+            to_local_time(candles[-1]["time"]), percent_delta, RED_HEART,
+            candles[-1]["c"],
         )
 
     if close_price > open_price and percent_delta > grow_percent:
         return "Candle increase: {}\n" \
-               "Candle percent delta: {:.03f} (up) ${}".format(
-            to_local_time(candles[-1]["time"]), percent_delta, candles[-1]["c"]
+               "Candle percent delta: {:.03f} {} ${}".format(
+            to_local_time(candles[-1]["time"]), percent_delta, GREEN_HEART,
+            candles[-1]["c"],
         )
 
     return None

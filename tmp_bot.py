@@ -236,8 +236,7 @@ def process_sell(message, call=None, company_name=None):
 def echo(message):
     BOT.send_message(
         message.chat.id,
-        text=u'&#x1F601'.format(message.text),
-        parse_mode="html",
+        text="Echo: {}".format(message.text),
     )
 
 
